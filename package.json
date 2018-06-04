@@ -1,0 +1,16 @@
+{
+  "name": "@openscope/validator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "author": "Nate Geslin, teamtomkins23@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "minimist": "^1.2.0",
+    "ora": "^2.1.0"
+  }
+}

@@ -1,0 +1,5 @@
+.DS_Store
+.vscode/
+_mock/
+node_modules/
+
