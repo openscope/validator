@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const minimist = require('minimist');
 const notifier = require('./lib/notifier');
-const airportValidator = require('./lib/airportValidator');
+const validator = require('./lib/validator');
 
 const OPTIONS = {
     _fullPathToAirportFile: '',
@@ -39,7 +39,7 @@ function _loadAirportFile(args) {
 
         notifier.succeed();
 
-        airportValidator(JSON.parse(airportJson), OPTIONS);
+        validator(JSON.parse(airportJson), OPTIONS);
     });
 }
 
