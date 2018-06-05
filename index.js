@@ -11,11 +11,9 @@ const OPTIONS = {
     shouldValidateSpawnPatterns: false
 };
 
-//
 // -a ksea             entire airport file
 // --fixes             fixes, valid position and references
 // --spawn-patterns    spawnPatterns, valid fixenames and object shapes
-
 function _parseArgs() {
     const args = minimist(process.argv.slice(2));
 
@@ -48,12 +46,10 @@ function _loadAirportFile(args) {
 (function() {
     notifier.start({ text: 'Parsing ARGS' });
 
-    // parse args
     _parseArgs();
 
     notifier.succeed();
     notifier.start({ text: `Loading Airport file: ${OPTIONS.airport}`});
 
-    // open airport file
     _loadAirportFile();
 })();
