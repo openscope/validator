@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./index.js"
+    "start": "node ./index.js",
+    "test": "mocha lib/**/*.spec.js"
   },
   "author": "Nate Geslin, teamtomkins23@gmail.com",
   "license": "MIT",
@@ -16,6 +17,7 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "sinon": "^5.0.10"
   }
 }
