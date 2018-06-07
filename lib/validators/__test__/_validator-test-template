@@ -55,8 +55,7 @@ describe('.airspaceValidator', () => {
         });
 
         it('should call Notifier.succeed()', () => {
-            const foundErrorsMock = []
-            const result = airspaceValidator(foundErrorsMock, airportKseaMock);
+            const result = airspaceValidator([], airportKseaMock);
 
             expect(notifierSucceedSpy.calledOnce).to.be.true;
         });
@@ -70,34 +69,30 @@ describe('.airspaceValidator', () => {
 
     describe('airspace obj keys', () => {
         describe('invalid obj keys', () => {
-            const invalidObjKeyMock = {
-                airspace: [
-                    {
-                        floor: '',
-                        poly: '',
-                        threeve: ''
-                    }
-                ]
-            };
+            // const invalidObjKeyMock = {
+            //     airspace: {
+            //         angle: ''
+            //     }
+            // };
 
-            it('should return the error message', () => {
-                const foundErrorsMock = [];
-                const result = airspaceValidator(foundErrorsMock, invalidObjKeyMock);
+            // it('should return the error message', () => {
+            //     const foundErrorsMock = [];
+            //     const result = airspaceValidator(foundErrorsMock, invalidObjKeyMock);
 
-                expect(foundErrorsMock[0]).to.eq(`${ERROR_MESSAGE.REQUIRED_KEYS_AIRSPACE} ceiling, airspace_class`);
-            });
+            //     expect(foundErrorsMock[0]).to.eq(ERROR_MESSAGE.REQUIRED_KEYS_airspace);
+            // });
 
-            it('should call Notifier.fail()', () => {
-                const result = airspaceValidator([], invalidObjKeyMock);
+            // it('should call Notifier.fail()', () => {
+            //     const result = airspaceValidator([], invalidObjKeyMock);
 
-                expect(notifierFailSpy.calledOnce).to.be.true;
-            });
+            //     expect(notifierFailSpy.calledOnce).to.be.true;
+            // });
 
-            it('should return false', () => {
-                const result = airspaceValidator([], invalidObjKeyMock);
+            // it('should return false', () => {
+            //     const result = airspaceValidator([], invalidObjKeyMock);
 
-                expect(result).to.be.false;
-            });
+            //     expect(result).to.be.false;
+            // });
         });
     });
 });
