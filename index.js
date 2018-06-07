@@ -15,6 +15,8 @@ const OPTIONS = {
 // --fixes             fixes, valid position and references
 // --spawn-patterns    spawnPatterns, valid fixenames and object shapes
 function _parseArgs() {
+    notifier.start({ text: 'Parsing ARGS' });
+
     const args = minimist(process.argv.slice(2));
 
     if (typeof args.a !== 'undefined') {
@@ -29,9 +31,13 @@ function _parseArgs() {
     if (typeof args.shouldValidateSpawnPatterns !== 'undefined') {
         OPTIONS.shouldValidateFixes = args.spawnPatterns;
     }
+
+    notifier.succeed();
 }
 
 function _loadAirportFile(args) {
+    notifier.start({ text: `Loading Airport file: ${OPTIONS.airport}`});
+
     fs.readFile(OPTIONS._fullPathToAirportFile, 'utf8', (err, airportJson) => {
         if (err) {
             notifier.fail();
@@ -44,12 +50,6 @@ function _loadAirportFile(args) {
 }
 
 (function() {
-    notifier.start({ text: 'Parsing ARGS' });
-
     _parseArgs();
-
-    notifier.succeed();
-    notifier.start({ text: `Loading Airport file: ${OPTIONS.airport}`});
-
     _loadAirportFile();
 })();
