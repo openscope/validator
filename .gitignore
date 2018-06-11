@@ -1,6 +1,5 @@
 .DS_Store
 .vscode/
-_mock/
 coverage/
 node_modules/
 .nyc_output

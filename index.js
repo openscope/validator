@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const minimist = require('minimist');
-const notifier = require('./lib/notifier');
+const Notifier = require('./lib/notifier');
 const validator = require('./lib/validator');
 
 const OPTIONS = {
@@ -15,7 +15,7 @@ const OPTIONS = {
 // --fixes             fixes, valid position and references
 // --spawn-patterns    spawnPatterns, valid fixenames and object shapes
 function _parseArgs() {
-    notifier.start({ text: 'Parsing ARGS' });
+    Notifier.start({ text: 'Parsing ARGS' });
 
     const args = minimist(process.argv.slice(2));
 
@@ -32,18 +32,20 @@ function _parseArgs() {
         OPTIONS.shouldValidateFixes = args.spawnPatterns;
     }
 
-    notifier.succeed();
+    Notifier.succeed();
 }
 
 function _loadAirportFile(args) {
-    notifier.start({ text: `Loading Airport file: ${OPTIONS.airport}`});
+    Notifier.start({ text: `Loading Airport file: ${OPTIONS.airport}`});
 
     fs.readFile(OPTIONS._fullPathToAirportFile, 'utf8', (err, airportJson) => {
         if (err) {
-            notifier.fail();
+            Notifier.fail();
+
+            throw new Error(err);
         }
 
-        notifier.succeed();
+        Notifier.succeed();
 
         validator(JSON.parse(airportJson), OPTIONS);
     });
