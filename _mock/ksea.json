@@ -511,6 +511,7 @@
                 "KSEA34C": [["NEZUG", "A40+"], "^_NEZUG070PAE139", "_SUMMA326017"],
                 "KSEA34R": [["NEZUG", "A40+"], "^_NEZUG070PAE139", "_SUMMA326017"]
             },
+            "body": [],
             "exitPoints": {
                 "BKE": ["SUMMA", "BKE"],
                 "LKV": ["SUMMA", "LKV"],
