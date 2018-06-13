@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./index.js -a _mock/ksea.json --fixes --spawnPatterns",
     "test": "nyc mocha 'lib/**/*.spec.js'",
-    "test:watch": "nyc mocha -w --reporter dot 'lib/**/*.spec.js'",
+    "test:watch": "nyc mocha -w --reporter dot '{,!(_mock)/**/}*.spec.js'",
     "posttest": "nyc report --reporter=lcov --reporter=cobertura"
   },
   "author": "Nate Geslin, teamtomkins23@gmail.com",
@@ -14,7 +14,7 @@
   "nyc": {
     "exclude": [
       "**/*.spec.js",
-      "_mock"
+      "**/_mock/**"
     ]
   },
   "dependencies": {
