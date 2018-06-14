@@ -1,44 +1,15 @@
 const fs = require('fs');
-const path = require('path');
-const minimist = require('minimist');
 const Notifier = require('./lib/notifier');
+const parseArgs = require('./lib/parseArgs');
 const validator = require('./lib/validator');
 
-const OPTIONS = {
-    _fullPathToAirportFile: '',
-    airport: '',
-    shouldValidateFixes: false,
-    shouldValidateSpawnPatterns: false
-};
-
-// -a ksea             entire airport file
-// --fixes             fixes, valid position and references
-// --spawn-patterns    spawnPatterns, valid fixenames and object shapes
-function _parseArgs() {
-    Notifier.start({ text: 'Parsing ARGS' });
-
-    const args = minimist(process.argv.slice(2));
-
-    if (typeof args.a !== 'undefined') {
-        OPTIONS.airport = args.a;
-        OPTIONS._fullPathToAirportFile = path.join(__dirname, OPTIONS.airport);
-    }
-
-    if (typeof args.shouldValidateFixes !== 'undefined') {
-        OPTIONS.shouldValidateFixes = args.fixes;
-    }
-
-    if (typeof args.shouldValidateSpawnPatterns !== 'undefined') {
-        OPTIONS.shouldValidateFixes = args.spawnPatterns;
-    }
-
-    Notifier.succeed();
-}
-
-function _loadAirportFile(args) {
-    Notifier.start({ text: `Loading Airport file: ${OPTIONS.airport}`});
-
-    fs.readFile(OPTIONS._fullPathToAirportFile, 'utf8', (err, airportJson) => {
+/**
+ *
+ * @param {object} options
+ */
+function _loadAirportFile(options) {
+    Notifier.start(`Loading Airport file: ${options.airport}`);
+    fs.readFile(options.fullPathToAirportFile, 'utf8', (err, airportJson) => {
         if (err) {
             Notifier.fail();
 
@@ -47,11 +18,21 @@ function _loadAirportFile(args) {
 
         Notifier.succeed();
 
-        validator(JSON.parse(airportJson), OPTIONS);
+        validator(JSON.parse(airportJson), options);
     });
 }
 
 (function() {
-    _parseArgs();
-    _loadAirportFile();
+    const options = parseArgs();
+
+    if (options.shouldExit) {
+        console.log('\r\n\r\n help docs here');
+
+        return;
+    }
+
+    Notifier.start('Gathering options');
+    Notifier.succeed();
+
+    _loadAirportFile(options);
 })();
