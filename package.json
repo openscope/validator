@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./index.js -a _mock/ksea.json --fixes --spawnPatterns",
+    "start": "node ./index.js -a ksea --fixes --spawnPatterns",
     "help": "node ./index.js -h",
     "test": "nyc mocha 'lib/**/*.spec.js'",
     "test:watch": "nyc mocha -w --reporter dot '{,!(_mock)/**/}*.spec.js'",
