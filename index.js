@@ -10,13 +10,46 @@ const validator = require('./lib/validator');
  * @property PATHS
  */
 const PATHS = {
+    /**
+     * Path to airport files
+     *
+     * This follows the existing `Openscope` folder structure convention(s)
+     *
+     * @memberOf PATHS
+     * @property AIRPORT_DIR
+     * @type {string}
+     */
     AIRPORT_DIR: './assets/airports',
+
+    /**
+     * Path to the _complied_ `aircraft.json`
+     *
+     * It's important we reference the compiled file
+     *
+     * @memberOf PATHS
+     * @property AIRCRAFT
+     * @type {string}
+     */
     AIRCRAFT: './public/assets/aircraft/aircraft.json',
+
+    /**
+     * Path to the _complied_ `airlines.json`
+     *
+     * It's important we reference the compiled file
+     *
+     * @memberOf PATHS
+     * @property AIRLINES
+     * @type {string}
+     */
     AIRLINES: './public/assets/airlines/airlines.json'
 };
 
 /**
+ * Load the airport file suppied by icao identifier with the `-a` flag
  *
+ * The full file path will be built passed on the `process.cwd()` and
+ * and expectation that airport files live in `/assets/airports/` from
+ * the process root
  *
  * @private
  * @function _loadAirportFile
@@ -47,7 +80,7 @@ function _loadAirportFile(options) {
         return;
     }
 
-    Notifier.start('Gathering options');
+    Notifier.start('Parsing options');
     Notifier.succeed();
 
     _loadAirportFile(options);
