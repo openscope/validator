@@ -1,8 +1,10 @@
 {
   "name": "@openscope/validator",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "A CLI used to validate an airport definition file used in the [openscope](http://openscope.co) ATC Simulator",
   "main": "index.js",
+  "preferGlobal": true,
+  "bin": "./bin/validator.js",
   "scripts": {
     "start": "node ./index.js -a ksea --fixes --spawnPatterns",
     "help": "node ./index.js -h",
@@ -11,6 +13,9 @@
     "posttest": "nyc report --reporter=lcov --reporter=cobertura"
   },
   "author": "Nate Geslin, teamtomkins23@gmail.com",
+  "repository": {
+    "url": "https://github.com/openscope/validator"
+  },
   "license": "MIT",
   "nyc": {
     "exclude": [
