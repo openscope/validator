@@ -1,48 +1,8 @@
 const fs = require('fs');
 const Notifier = require('./lib/notifier');
-const parseArgs = require('./lib/parseArgs');
+const cli = require('./lib/cli');
+const cliHelp = require('./lib/cliHelp');
 const validator = require('./lib/validator');
-
-/**
- * References to files and paths that can be used elsewhere in the app
- *
- * @constant
- * @property PATHS
- */
-const PATHS = {
-    /**
-     * Path to airport files
-     *
-     * This follows the existing `Openscope` folder structure convention(s)
-     *
-     * @memberOf PATHS
-     * @property AIRPORT_DIR
-     * @type {string}
-     */
-    AIRPORT_DIR: './assets/airports',
-
-    /**
-     * Path to the _complied_ `aircraft.json`
-     *
-     * It's important we reference the compiled file
-     *
-     * @memberOf PATHS
-     * @property AIRCRAFT
-     * @type {string}
-     */
-    AIRCRAFT: './public/assets/aircraft/aircraft.json',
-
-    /**
-     * Path to the _complied_ `airlines.json`
-     *
-     * It's important we reference the compiled file
-     *
-     * @memberOf PATHS
-     * @property AIRLINES
-     * @type {string}
-     */
-    AIRLINES: './public/assets/airlines/airlines.json'
-};
 
 /**
  * Load the airport file suppied by icao identifier with the `-a` flag
@@ -72,10 +32,12 @@ function _loadAirportFile(options) {
 }
 
 (function() {
-    const options = parseArgs(PATHS);
+    const options = cli();
 
     if (options.shouldExit) {
-        console.log('\r\n\r\n help docs here');
+        cliHelp();
+
+        process.exit(0);
 
         return;
     }
