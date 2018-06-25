@@ -1,6 +1,6 @@
 {
   "name": "@openscope/validator",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "A CLI used to validate an airport definition file used in the [openscope](http://openscope.co) ATC Simulator",
   "main": "index.js",
   "preferGlobal": true,
