@@ -15,10 +15,10 @@ const validator = require('./lib/validator');
  * @function _loadAirportFile
  * @param {CliOptionsType} options
  */
-function _loadAirportFile(options) {
+function _loadAirportFile(options, airlineJson) {
     Notifier.start(`Loading Airport file: ${options.airport}`);
 
-    fs.readFile(options.fullPathToAirportFile, 'utf8', (err, airportJson) => {
+    fs.readFile(options.pathToAirportFile, 'utf8', (err, airportJson) => {
         if (err) {
             Notifier.fail();
 
@@ -27,7 +27,36 @@ function _loadAirportFile(options) {
 
         Notifier.succeed();
 
-        validator(JSON.parse(airportJson), options);
+        validator(options, JSON.parse(airportJson), airlineJson);
+    });
+}
+
+/**
+ * Load the airlines file
+ *
+ * The file we're looking for here is the single `airlines.json` file that is generated
+ * on build in the Openscope project.
+ *
+ * It is assumed that this file live at:
+ * - `/public/assets/airlines/airlines.json`
+ *
+ * @private
+ * @function _loadAirlinesAndAirportFiles
+ * @param {CliOptionsType} options
+ */
+function _loadAirlinesAndAirportFiles(options) {
+    Notifier.start(`Loading Airlines file`);
+
+    fs.readFile(options.pathToAirlineFile, 'utf8', (err, airlineJson) => {
+        if (err) {
+            Notifier.fail();
+
+            throw new Error(err);
+        }
+
+        Notifier.succeed();
+
+        _loadAirportFile(options, JSON.parse(airlineJson).airlines);
     });
 }
 
@@ -45,5 +74,5 @@ function _loadAirportFile(options) {
     Notifier.start('Parsing options');
     Notifier.succeed();
 
-    _loadAirportFile(options);
+    _loadAirlinesAndAirportFiles(options);
 })();
